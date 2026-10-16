@@ -11,26 +11,27 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
 ## 3. Pasos para la puesta en marcha desde una descarga nueva
 Para ejecutar el proyecto en un entorno limpio, seguir estos pasos:
 
-## A. Preparar el clúster gratuito en MongoDB Atlas:Ingresar a MongoDB Atlas y crear o utilizar un clúster gratuito (Tier M0 Free Cluster).   
+ Preparar el clúster gratuito en MongoDB Atlas:
+ Ingresar a MongoDB Atlas y crear o utilizar un clúster gratuito (Tier M0 Free Cluster).   
  Dirigirse a la sección de seguridad de la base de datos (Database Access) y crear un usuario y contraseña con permisos de lectura y escritura.  
  Ir a la sección de red (Network Access) y agregar la dirección IP actual o habilitar el acceso general (0.0.0.0/0) para permitir conexiones externas al clúster.  
- Obtener la URI de conexión (Connection String / MONGODB_URI) provista por Atlas.Copiar y configurar la plantilla de entorno:Duplicar el archivo de ejemplo .env.example para crear el archivo privado .env: 
+ Obtener la URI de conexión (Connection String / MONGODB_URI) provista por Atlas. Copiar y configurar la plantilla de entorno:Duplicar el archivo de ejemplo .env.example para crear el archivo privado .env: 
 
- ## B. Copiar y configurar la plantilla de entorno:
+ Copiar y configurar la plantilla de entorno:
  Duplicar el archivo de ejemplo .env.example para crear el archivo privado .env.
- Abrir el archivo .env recién creado y completar la variable MONGODB_URI pegando la cadena de conexión real de tu clúster (reemplazando <usuario> y <contraseña> con las credenciales creadas). 
+ Abrir el archivo .env recién creado y completar la variable MONGODB_URI pegando la cadena de conexión real de tu clúster reemplazando usuario y contraseña con las credenciales creadas. 
 
- ## C. Ejecutar la verificación:
+ Ejecutar la verificación:
  Comprobar que la conexión con la base de datos responde correctamente ejecutando el script de diagnóstico:
  node --env-file=.env scripts/comprobar-conexion.js
 
  ## 4. Diagnóstico DNS, resolutores y comandos exactos
- ## Diagnóstico y ajustes DNS: En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en src/config/base-datos.js mediante la API nativa node:dns asignando los servidores públicos de Google y Cloudflare
- ## Comandos del proyecto:
- Comprobar conexión: node --env-file=.env scripts/comprobar-conexion.js
- Crear reserva (script): node --env-file=.env scripts/crear-reserva.js
- Listar reservas (script): node --env-file=.env scripts/listar-reservas.js
- Control de calidad (ESLint + Prettier): npm run check
+  Diagnóstico y ajustes DNS: En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en src/config/base-datos.js mediante la API nativa node:dns asignando los servidores públicos de Google y Cloudflare
+  Comandos del proyecto:
+  Comprobar conexión: node --env-file=.env scripts/comprobar-conexion.js
+  Crear reserva (script): node --env-file=.env scripts/crear-reserva.js
+  Listar reservas (script): node --env-file=.env scripts/listar-reservas.js
+  Control de calidad (ESLint + Prettier): npm run check
 
 ## 5. Mapa de archivos, esquema, modelo y colección
 Mapa de archivos relevantes:   
