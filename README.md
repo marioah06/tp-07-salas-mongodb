@@ -1,7 +1,7 @@
 # TP 07 - Integración de MongoDB y Mongoose
 
 ## 1. Punto de partida y nombre de la copia
-Este proyecto se desarrolló tomando como punto de partida la estructura del TP 06 (`tp-06-salas-modular`). La nueva copia de trabajo y repositorio se denominan **`tp-07-salas-mongodb`**.
+Este proyecto se desarrolló tomando como punto de partida la estructura del TP 06 tp-06-salas-modular. La nueva copia de trabajo y repositorio se denominan tp-07-salas-mongodb.
 
 ## 2. Versiones utilizadas y confirmación de Atlas Free (M0)
 * **Node.js**: v22.16.0
@@ -9,18 +9,17 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
 * **MongoDB**: Instancia en la nube utilizando **MongoDB Atlas (Tier M0 Free Cluster)**.
 
 ## 3. Pasos para la puesta en marcha desde una descarga nueva
-Para ejecutar el proyecto en un entorno limpio, seguir estos pasos:
-**Clonar/Descargar el repositorio e instalar dependencias**:
-   bash
-   npm install
-
+**Clonar/Descargar el repositorio e instalar dependencias**
+   
  **Configurar el clúster gratuito en MongoDB Atlas**:
  - `Crear un clúster gratuito (Tier M0)`.  
  - `Crear un usuario con clave para la base de datos`.  
  - `En la sección Network Access, agregar la IP actual o habilitar 0.0.0.0/0 para permitir la conexión`.
+
  **Configurar variables de entorno**:
  - `Copiar la plantilla genérica`:   Bashcp .env.example .env
  - `Editar el archivo .env asignando la URI real de conexión a MongoDB Atlas`.
+
  **Ejecutar la verificación**:
  -`node --env-file=.env scripts/comprobar-conexion.js`
 
