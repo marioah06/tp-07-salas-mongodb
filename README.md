@@ -25,22 +25,22 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
 
  ## 4. Diagnóstico DNS, resolutores y comandos exactos
   - `Diagnóstico y ajustes DNS: En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en src/config/base-datos.js mediante la API nativa node:dns asignando los servidores públicos de Google y Cloudflare`
-  - `Comandos del proyecto:
+  **Comandos del proyecto**:
  - ` Comprobar conexión: node --env-file=.env scripts/comprobar-conexion.js`
  - ` Crear reserva (script): node --env-file=.env scripts/crear-reserva.js`
  - ` Listar reservas (script): node --env-file=.env scripts/listar-reservas.js`
  - ` Control de calidad (ESLint + Prettier): npm run check`
 
-## 5. Mapa de archivos, esquema, modelo y colección
 **Mapa de archivos relevantes**:   
-- `src/config/entorno.js: Lectura y validación de variables de entorno (PORT, MONGODB_URI)`.
-- `src/config/base-datos.js: Lógica de conexión y desconexión a MongoDB con Mongoose`.
-- `src/models/reserva.js: Definición del esquema (ReservaSchema) y modelo Mongoose (Reserva)`.      
-- `scripts/: Scripts independientes de prueba en terminal (comprobar-conexion.js, crear-reserva.js, listar-reservas.js)`.
+- `src/config/entorno.js`: Lectura y validación de variables de entorno (`PORT`, `MONGODB_URI`).
+- `src/config/base-datos.js`: Lógica de conexión y desconexión a MongoDB con Mongoose.
+- `src/models/reserva.js`: Definición del esquema (`ReservaSchema`) y modelo Mongoose (`Reserva`).     
+- `scripts/`: Scripts independientes de prueba en terminal (`comprobar-conexion.js`, `crear-reserva.js`, `listar-reservas.js`).
+
 **Estructura Mongoose**:   
-- `Esquema (ReservaSchema): Define las propiedades del documento (estudiante, email, sala, fecha, turno, personas) y sus tipos de datos`.
-- `Modelo (Reserva): Interfaz constructora de Mongoose que compila el esquema para interactuar con la base de datos`.
-- `Colección: Mongoose mapea automáticamente el modelo a la colección en plural dentro de la base de datos (reservas)`.
+- **Esquema (`ReservaSchema`)**: Define las propiedades del documento (`estudiante`, `email`, `sala`, `fecha`, `turno`, `personas`) y sus tipos de datos.
+- **Modelo (`Reserva`)**: Interfaz constructora de Mongoose que compila el esquema para interactuar con la base de datos.
+- **Colección**: Mongoose mapea automáticamente el modelo a la colección en plural dentro de la base de datos (`reservas`).
 
 ## 6. **Campos y reglas de validación:**
 - `estudiante`: String, requerido.
