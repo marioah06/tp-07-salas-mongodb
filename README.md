@@ -24,13 +24,16 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
  -`node --env-file=.env scripts/comprobar-conexion.js`
 
  ## 4. Diagnóstico DNS, resolutores y comandos exactos
-  - `Diagnóstico y ajustes DNS: En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en src/config/base-datos.js mediante la API nativa node:dns asignando los servidores públicos de Google y Cloudflare`
-  **Comandos del proyecto**:
- - ` Comprobar conexión: node --env-file=.env scripts/comprobar-conexion.js`
- - ` Crear reserva (script): node --env-file=.env scripts/crear-reserva.js`
- - ` Listar reservas (script): node --env-file=.env scripts/listar-reservas.js`
- - ` Control de calidad (ESLint + Prettier): npm run check`
 
+**Diagnóstico y ajustes DNS**: 
+En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en `src/config/base-datos.js` mediante la API nativa `node:dns` asignando los servidores públicos de Google y Cloudflare.
+
+**Comandos del proyecto**:
+- **Comprobar conexión**: `node --env-file=.env scripts/comprobar-conexion.js`
+- **Crear reserva (script)**: `node --env-file=.env scripts/crear-reserva.js`
+- **Listar reservas (script)**: `node --env-file=.env scripts/listar-reservas.js`
+- **Control de calidad (ESLint + Prettier)**: `npm run check`
+- **Arranque del servidor web**: `npm run dev`
 **Mapa de archivos relevantes**:   
 - `src/config/entorno.js`: Lectura y validación de variables de entorno (`PORT`, `MONGODB_URI`).
 - `src/config/base-datos.js`: Lógica de conexión y desconexión a MongoDB con Mongoose.
@@ -55,16 +58,20 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
 - No se evitan solapamientos o reservas dobles para la misma sala en el mismo turno/fecha a nivel de esquema (se abordará en la capa de negocio/servicios).
 
  ## 7. **Matriz de pruebas y evidencia de persistencia**
- Se ejecutaron satisfactoriamente las pruebas desde la terminal demostrando la persistencia entre procesos independientes:   
- - `Prueba de Conexión`:
- - `Comando`: node --env-file=.env scripts/comprobar-conexion.js  
- - `Resultado`: "Conexión con MongoDB establecida".
- - `Creación de Reserva`:
- - `Comando`: node --env-file=.env scripts/crear-reserva.js   
- - `Resultado`: "Reserva guardada con éxito. ID: 6ad231eb2c82e5b6b8c43614"
- **Listado y Persistencia**:
- - `Comando`: node --env-file=.env scripts/listar-reservas.js   
- - `Resultado`: La reserva persistió correctamente en MongoDB Atlas y se desplegó en consola mediante console.table:
+
+Se ejecutaron satisfactoriamente las pruebas desde la terminal demostrando la persistencia entre procesos independientes:  
+
+- **Prueba de Conexión**
+  - **Comando**: `node --env-file=.env scripts/comprobar-conexion.js`
+  - **Resultado**: "Conexión con MongoDB establecida".
+
+- **Creación de Reserva**
+  - **Comando**: `node --env-file=.env scripts/crear-reserva.js`
+  - **Resultado**: "Reserva guardada con éxito. ID: 6ad231eb2c82e5b6b8c43614"
+
+**Listado y Persistencia**
+- **Comando**: `node --env-file=.env scripts/listar-reservas.js`
+- **Resultado**: La reserva persistió correctamente en MongoDB Atlas y se desplegó en consola mediante `console.table`.
 ┌─────────┬────────────────────────────┬─────────────────┬─────────────────────────────┬───────────────────┬──────────────┬───────────┬───────────┐
 │ (index) │ id                         │ estudiante      │ email                       │ sala              │ fecha        │ turno     │ personas  │
 ├─────────┼────────────────────────────┼─────────────────┼─────────────────────────────┼───────────────────┼──────────────┼───────────┼───────────┤
