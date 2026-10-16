@@ -11,36 +11,37 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
 ## 3. Pasos para la puesta en marcha desde una descarga nueva
 **Clonar/Descargar el repositorio e instalar dependencias**
    
- **Configurar el clúster gratuito en MongoDB Atlas**:
+ **Configurar el clúster gratuito en MongoDB Atlas**
  - `Crear un clúster gratuito (Tier M0)`.  
  - `Crear un usuario con clave para la base de datos`.  
  - `En la sección Network Access, agregar la IP actual o habilitar 0.0.0.0/0 para permitir la conexión`.
 
- **Configurar variables de entorno**:
+ **Configurar variables de entorno**
  - `Copiar la plantilla genérica`:   Bashcp .env.example .env
  - `Editar el archivo .env asignando la URI real de conexión a MongoDB Atlas`.
 
- **Ejecutar la verificación**:
+ **Ejecutar la verificación**
  -`node --env-file=.env scripts/comprobar-conexion.js`
 
  ## 4. Diagnóstico DNS, resolutores y comandos exactos
 
-**Diagnóstico y ajustes DNS**: 
+**Diagnóstico y ajustes DNS** 
 En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en `src/config/base-datos.js` mediante la API nativa `node:dns` asignando los servidores públicos de Google y Cloudflare.
 
-**Comandos del proyecto**:
+**Comandos del proyecto**
 - **Comprobar conexión**: `node --env-file=.env scripts/comprobar-conexion.js`
 - **Crear reserva (script)**: `node --env-file=.env scripts/crear-reserva.js`
 - **Listar reservas (script)**: `node --env-file=.env scripts/listar-reservas.js`
 - **Control de calidad (ESLint + Prettier)**: `npm run check`
 - **Arranque del servidor web**: `npm run dev`
-**Mapa de archivos relevantes**:   
+
+**Mapa de archivos relevantes**
 - `src/config/entorno.js`: Lectura y validación de variables de entorno (`PORT`, `MONGODB_URI`).
 - `src/config/base-datos.js`: Lógica de conexión y desconexión a MongoDB con Mongoose.
-- `src/models/reserva.js`: Definición del esquema (`ReservaSchema`) y modelo Mongoose (`Reserva`).     
+- `src/models/reserva.js`: Definición del esquema (`ReservaSchema`) y modelo Mongoose (`Reserva`).
 - `scripts/`: Scripts independientes de prueba en terminal (`comprobar-conexion.js`, `crear-reserva.js`, `listar-reservas.js`).
 
-**Estructura Mongoose**:   
+**Estructura Mongoose**  
 - **Esquema (`ReservaSchema`)**: Define las propiedades del documento (`estudiante`, `email`, `sala`, `fecha`, `turno`, `personas`) y sus tipos de datos.
 - **Modelo (`Reserva`)**: Interfaz constructora de Mongoose que compila el esquema para interactuar con la base de datos.
 - **Colección**: Mongoose mapea automáticamente el modelo a la colección en plural dentro de la base de datos (`reservas`).
