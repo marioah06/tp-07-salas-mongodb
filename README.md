@@ -10,62 +10,62 @@ Este proyecto se desarrolló tomando como punto de partida la estructura del TP 
 
 ## 3. Pasos para la puesta en marcha desde una descarga nueva
 Para ejecutar el proyecto en un entorno limpio, seguir estos pasos:
+**Clonar/Descargar el repositorio e instalar dependencias**:
+   bash
+   npm install
 
- Preparar el clúster gratuito en MongoDB Atlas:
- Ingresar a MongoDB Atlas y crear o utilizar un clúster gratuito (Tier M0 Free Cluster).   
- Dirigirse a la sección de seguridad de la base de datos (Database Access) y crear un usuario y contraseña con permisos de lectura y escritura.  
- Ir a la sección de red (Network Access) y agregar la dirección IP actual o habilitar el acceso general (0.0.0.0/0) para permitir conexiones externas al clúster.  
- Obtener la URI de conexión (Connection String / MONGODB_URI) provista por Atlas. Copiar y configurar la plantilla de entorno:Duplicar el archivo de ejemplo .env.example para crear el archivo privado .env: 
-
- Copiar y configurar la plantilla de entorno:
- Duplicar el archivo de ejemplo .env.example para crear el archivo privado .env.
- Abrir el archivo .env recién creado y completar la variable MONGODB_URI pegando la cadena de conexión real de tu clúster reemplazando usuario y contraseña con las credenciales creadas. 
-
- Ejecutar la verificación:
- Comprobar que la conexión con la base de datos responde correctamente ejecutando el script de diagnóstico:
- node --env-file=.env scripts/comprobar-conexion.js
+ **Configurar el clúster gratuito en MongoDB Atlas**:
+ - `Crear un clúster gratuito (Tier M0)`.  
+ - `Crear un usuario con clave para la base de datos`.  
+ - `En la sección Network Access, agregar la IP actual o habilitar 0.0.0.0/0 para permitir la conexión`.
+ **Configurar variables de entorno**:
+ - `Copiar la plantilla genérica`:   Bashcp .env.example .env
+ - `Editar el archivo .env asignando la URI real de conexión a MongoDB Atlas`.
+ **Ejecutar la verificación**:
+ -`node --env-file=.env scripts/comprobar-conexion.js`
 
  ## 4. Diagnóstico DNS, resolutores y comandos exactos
-  Diagnóstico y ajustes DNS: En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en src/config/base-datos.js mediante la API nativa node:dns asignando los servidores públicos de Google y Cloudflare
-  Comandos del proyecto:
-  Comprobar conexión: node --env-file=.env scripts/comprobar-conexion.js
-  Crear reserva (script): node --env-file=.env scripts/crear-reserva.js
-  Listar reservas (script): node --env-file=.env scripts/listar-reservas.js
-  Control de calidad (ESLint + Prettier): npm run check
+  - `Diagnóstico y ajustes DNS: En entornos locales que presentaron bloqueos en consultas SRV de MongoDB Atlas, se forzó la resolución DNS en src/config/base-datos.js mediante la API nativa node:dns asignando los servidores públicos de Google y Cloudflare`
+  - `Comandos del proyecto:
+ - ` Comprobar conexión: node --env-file=.env scripts/comprobar-conexion.js`
+ - ` Crear reserva (script): node --env-file=.env scripts/crear-reserva.js`
+ - ` Listar reservas (script): node --env-file=.env scripts/listar-reservas.js`
+ - ` Control de calidad (ESLint + Prettier): npm run check`
 
 ## 5. Mapa de archivos, esquema, modelo y colección
-Mapa de archivos relevantes:   
-src/config/entorno.js: Lectura y validación de variables de entorno (PORT, MONGODB_URI).
-src/config/base-datos.js: Lógica de conexión y desconexión a MongoDB con Mongoose.
-src/models/reserva.js: Definición del esquema (ReservaSchema) y modelo Mongoose (Reserva).scripts/: Scripts independientes de prueba en terminal (comprobar-conexion.js, crear-reserva.js, listar-reservas.js).
-Estructura Mongoose:   
-Esquema (ReservaSchema): Define las propiedades del documento (estudiante, email, sala, fecha, turno, personas) y sus tipos de datos.
-Modelo (Reserva): Interfaz constructora de Mongoose que compila el esquema para interactuar con la base de datos.
-Colección: Mongoose mapea automáticamente el modelo a la colección en plural dentro de la base de datos (reservas).
+**Mapa de archivos relevantes**:   
+- `src/config/entorno.js: Lectura y validación de variables de entorno (PORT, MONGODB_URI)`.
+- `src/config/base-datos.js: Lógica de conexión y desconexión a MongoDB con Mongoose`.
+- `src/models/reserva.js: Definición del esquema (ReservaSchema) y modelo Mongoose (Reserva)`.      
+- `scripts/: Scripts independientes de prueba en terminal (comprobar-conexion.js, crear-reserva.js, listar-reservas.js)`.
+**Estructura Mongoose**:   
+- `Esquema (ReservaSchema): Define las propiedades del documento (estudiante, email, sala, fecha, turno, personas) y sus tipos de datos`.
+- `Modelo (Reserva): Interfaz constructora de Mongoose que compila el esquema para interactuar con la base de datos`.
+- `Colección: Mongoose mapea automáticamente el modelo a la colección en plural dentro de la base de datos (reservas)`.
 
-## 6. Campos, reglas y límites no controlados
-Campos y reglas de validación:  
- estudiante: String, requerido.
- email: String, requerido, formato de correo válido.
- sala: String, requerido.
- fecha: String/Date, requerido.
- turno: String, requerido.
- personas: Number, requerido, entero positivo.
- Límites aún no controlados:   
- No se valida la capacidad máxima real de cada sala físicamente.
- No se evitan solapamientos o reservas dobles para la misma sala en el mismo turno/fecha a nivel de esquema se abordará en la capa de negocio/servicios.
+## 6. **Campos y reglas de validación:**
+- `estudiante`: String, requerido.
+- `email`: String, requerido, formato de correo válido.
+- `sala`: String, requerido.
+- `fecha`: String/Date, requerido.
+- `turno`: String, requerido.
+- `personas`: Number, requerido, entero positivo.
 
- ## 7. Matriz de pruebas y evidencia de persistencia
+**Límites aún no controlados:**
+- No se valida la capacidad máxima real de cada sala físicamente.
+- No se evitan solapamientos o reservas dobles para la misma sala en el mismo turno/fecha a nivel de esquema (se abordará en la capa de negocio/servicios).
+
+ ## 7. **Matriz de pruebas y evidencia de persistencia**
  Se ejecutaron satisfactoriamente las pruebas desde la terminal demostrando la persistencia entre procesos independientes:   
- Prueba de Conexión:
- Comando: node --env-file=.env scripts/comprobar-conexion.js  
- Resultado: "Conexión con MongoDB establecida".
- Creación de Reserva:
- Comando: node --env-file=.env scripts/crear-reserva.js   
- Resultado: "Reserva guardada con éxito. ID: 6ad231eb2c82e5b6b8c43614"
- Listado y Persistencia:
- Comando: node --env-file=.env scripts/listar-reservas.js   
- Resultado: La reserva persistió correctamente en MongoDB Atlas y se desplegó en consola mediante console.table:
+ - `Prueba de Conexión`:
+ - `Comando`: node --env-file=.env scripts/comprobar-conexion.js  
+ - `Resultado`: "Conexión con MongoDB establecida".
+ - `Creación de Reserva`:
+ - `Comando`: node --env-file=.env scripts/crear-reserva.js   
+ - `Resultado`: "Reserva guardada con éxito. ID: 6ad231eb2c82e5b6b8c43614"
+ **Listado y Persistencia**:
+ - `Comando`: node --env-file=.env scripts/listar-reservas.js   
+ - `Resultado`: La reserva persistió correctamente en MongoDB Atlas y se desplegó en consola mediante console.table:
 ┌─────────┬────────────────────────────┬─────────────────┬─────────────────────────────┬───────────────────┬──────────────┬───────────┬───────────┐
 │ (index) │ id                         │ estudiante      │ email                       │ sala              │ fecha        │ turno     │ personas  │
 ├─────────┼────────────────────────────┼─────────────────┼─────────────────────────────┼───────────────────┼──────────────┼───────────┼───────────┤
