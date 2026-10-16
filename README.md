@@ -73,6 +73,9 @@ Se ejecutaron satisfactoriamente las pruebas desde la terminal demostrando la pe
 **Listado y Persistencia**
 - **Comando**: `node --env-file=.env scripts/listar-reservas.js`
 - **Resultado**: La reserva persistió correctamente en MongoDB Atlas y se desplegó en consola mediante `console.table`.
+
+**Evidencia en MongoDB Atlas**:
+![Evidencia de reserva en MongoDB Atlas](./alta.png)
 ┌─────────┬────────────────────────────┬─────────────────┬─────────────────────────────┬───────────────────┬──────────────┬───────────┬───────────┐
 │ (index) │ id                         │ estudiante      │ email                       │ sala              │ fecha        │ turno     │ personas  │
 ├─────────┼────────────────────────────┼─────────────────┼─────────────────────────────┼───────────────────┼──────────────┼───────────┼───────────┤
